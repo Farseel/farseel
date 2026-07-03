@@ -216,16 +216,6 @@ const Hero: React.FC = () => {
                 Contact Me
               </button>
             </MagneticButton>
-
-            <MagneticButton>
-              <a 
-                href="/resume.pdf"
-                download
-                className="px-6 py-3 rounded-full bg-white/5 border border-white/5 text-text-light hover:bg-white/10 font-semibold text-sm transition-all duration-300 flex items-center gap-2"
-              >
-                Download CV
-              </a>
-            </MagneticButton>
           </motion.div>
 
           {/* Social icons links grid */}

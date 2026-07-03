@@ -20,10 +20,10 @@ const Certifications: React.FC = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 25 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: 'spring', stiffness: 100, damping: 16 } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', stiffness: 100, damping: 16 }
     }
   };
 
@@ -108,7 +108,7 @@ const Certifications: React.FC = () => {
                 </div>
 
                 <p className="text-text-secondary text-sm leading-relaxed mb-6 font-sans">
-                  Completed B.Tech in Information Technology with Honours at **{education.institution}**. Engaged in deep training regarding system algorithms, database architectures, programming principles, and software implementation.
+                  Completed B.Tech in Information Technology with Honours at {education.institution}. Engaged in deep training regarding system algorithms, database architectures, programming principles, and software implementation.
                 </p>
               </div>
 
