@@ -20,14 +20,14 @@ const Footer: React.FC = () => {
             &copy; {currentYear} {name}. All rights reserved.
           </p>
           <p className="font-mono text-[9px] text-text-secondary/30">
-            Formulated with Precision // Obsidian Charcoal Green Theme
+            Formulated with Precision // Obsidian Charcoal Blue Theme
           </p>
         </div>
 
         {/* Back to top button */}
         <button
           onClick={handleScrollToTop}
-          className="p-3 rounded-full bg-bg-card border border-white/5 hover:border-accent-green/20 hover:text-accent-secondary hover:shadow-glow-emerald-sm transition-all duration-300 text-text-secondary group"
+          className="p-3 rounded-full bg-bg-card border border-white/5 hover:border-accent-blue/20 hover:text-accent-sky hover:shadow-glow-blue-sm transition-all duration-300 text-text-secondary group"
           aria-label="Back to top"
         >
           <ArrowUp size={16} className="group-hover:-translate-y-0.5 transition-transform" />
@@ -35,8 +35,8 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Floating abstract decorative canvas particle nodes */}
-      <div className="absolute bottom-[-10px] left-[15%] w-2 h-2 rounded-full bg-accent-green/10" />
-      <div className="absolute bottom-10 right-[25%] w-1.5 h-1.5 rounded-full bg-accent-secondary/5" />
+      <div className="absolute bottom-[-10px] left-[15%] w-2 h-2 rounded-full bg-accent-blue/10" />
+      <div className="absolute bottom-10 right-[25%] w-1.5 h-1.5 rounded-full bg-accent-blue/5" />
     </footer>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Check, Loader2 } from 'lucide-react';
 import { portfolioData } from '../constants/portfolioData';
+import BorderGlow from '../components/BorderGlow';
 
 // Custom inline SVG icons
 const GithubIcon: React.FC<{ size?: number }> = ({ size = 20 }) => (
@@ -103,7 +104,7 @@ const Contact: React.FC = () => {
       link: `tel:${phone}`
     },
     {
-      label: 'Lab Location',
+      label: 'Location',
       value: location,
       icon: <MapPin size={16} />,
       link: null
@@ -112,49 +113,50 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-24 bg-bg-secondary relative border-t border-white/5">
-      {/* Subtle lab grid indicator */}
-      <div className="absolute top-0 left-0 w-[40px] h-[40px] border-b border-r border-white/5 flex items-center justify-center font-mono text-[8px] text-text-secondary/20">
-        SEC-06
-      </div>
-
       <div className="max-w-5xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           
           {/* Left Column: Contact Cards */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <span className="font-mono text-xs uppercase tracking-widest text-accent-secondary">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent-blue">
               Contact Info
             </span>
             <h2 className="text-3xl font-sans font-extrabold text-text-light mt-3 mb-4">
               Get In Touch
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-8 font-sans">
-              Have an interesting proposal, project challenge, or full-time machine learning/engineering role? Formulate a message, and I'll resolve it promptly.
+              Have an interesting proposal, project challenge, or full-time machine learning/engineering role? Send a message, and I'll get back to you promptly.
             </p>
 
             <div className="flex flex-col gap-4 mb-8">
               {contactCards.map((card, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-2xl bg-bg-card border border-white/5 flex items-center gap-4 hover:border-accent-green/10 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-bg-primary border border-white/5 flex items-center justify-center text-accent-secondary">
-                    {card.icon}
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-text-secondary/40 block">
-                      {card.label}
-                    </span>
-                    {card.link ? (
-                      <a href={card.link} className="font-mono text-xs md:text-sm text-text-light hover:text-accent-secondary transition-colors">
-                        {card.value}
-                      </a>
-                    ) : (
-                      <span className="font-mono text-xs md:text-sm text-text-light">
-                        {card.value}
-                      </span>
-                    )}
-                  </div>
+                <div key={idx}>
+                  <BorderGlow
+                    borderRadius={16}
+                    backgroundColor="rgba(13, 17, 39, 0.45)"
+                    glowColor="210 85 55"
+                    className="glassmorphic-card"
+                  >
+                    <div className="p-5 flex items-center gap-4 w-full h-full">
+                      <div className="w-10 h-10 rounded-lg bg-bg-primary/60 border border-white/5 flex items-center justify-center text-accent-blue">
+                        {card.icon}
+                      </div>
+                      <div>
+                        <span className="font-mono text-[9px] uppercase tracking-wider text-text-secondary/40 block">
+                          {card.label}
+                        </span>
+                        {card.link ? (
+                          <a href={card.link} className="font-mono text-xs md:text-sm text-text-light hover:text-accent-blue transition-colors">
+                            {card.value}
+                          </a>
+                        ) : (
+                          <span className="font-mono text-xs md:text-sm text-text-light">
+                            {card.value}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </BorderGlow>
                 </div>
               ))}
             </div>
@@ -165,10 +167,10 @@ const Contact: React.FC = () => {
                 Social Coordinates
               </span>
               <div className="flex gap-4">
-                <a href={github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-bg-card border border-white/5 text-text-secondary hover:text-accent-secondary hover:border-accent-green/20 hover:shadow-glow-emerald-sm transition-all duration-300" aria-label="GitHub">
+                <a href={github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-bg-card border border-white/5 text-text-secondary hover:text-accent-blue hover:border-accent-blue/20 hover:shadow-glow-blue-sm transition-all duration-300" aria-label="GitHub">
                   <GithubIcon size={16} />
                 </a>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-bg-card border border-white/5 text-text-secondary hover:text-accent-secondary hover:border-accent-green/20 hover:shadow-glow-emerald-sm transition-all duration-300" aria-label="LinkedIn">
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-bg-card border border-white/5 text-text-secondary hover:text-accent-blue hover:border-accent-blue/20 hover:shadow-glow-blue-sm transition-all duration-300" aria-label="LinkedIn">
                   <LinkedinIcon size={16} />
                 </a>
               </div>
@@ -177,152 +179,168 @@ const Contact: React.FC = () => {
 
           {/* Right Column: Form Panel */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            <div className="p-6 md:p-8 rounded-3xl bg-bg-card border border-white/5 relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                {!success ? (
-                  <motion.form
-                    key="contact-form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit}
-                    className="flex flex-col gap-6"
-                    noValidate
-                  >
-                    {/* Name input */}
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
-                        [FLD-01] Sender Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
-                          errors.name ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-green'
-                        } focus:shadow-glow-emerald-sm text-text-light text-sm outline-none transition-all duration-300`}
-                        placeholder="e.g. Walter White"
-                      />
-                      {errors.name && (
-                        <span className="font-mono text-[10px] text-red-500 mt-1">{errors.name}</span>
-                      )}
-                    </div>
-
-                    {/* Email input */}
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
-                        [FLD-02] Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
-                          errors.email ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-green'
-                        } focus:shadow-glow-emerald-sm text-text-light text-sm outline-none transition-all duration-300`}
-                        placeholder="e.g. walter@graymatter.com"
-                      />
-                      {errors.email && (
-                        <span className="font-mono text-[10px] text-red-500 mt-1">{errors.email}</span>
-                      )}
-                    </div>
-
-                    {/* Subject input */}
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="subject" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
-                        [FLD-03] Subject Heading
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={form.subject}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
-                          errors.subject ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-green'
-                        } focus:shadow-glow-emerald-sm text-text-light text-sm outline-none transition-all duration-300`}
-                        placeholder="e.g. Partnership proposal"
-                      />
-                      {errors.subject && (
-                        <span className="font-mono text-[10px] text-red-500 mt-1">{errors.subject}</span>
-                      )}
-                    </div>
-
-                    {/* Message textarea */}
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="message" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
-                        [FLD-04] Formulation Parameters (Message)
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        value={form.message}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
-                          errors.message ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-green'
-                        } focus:shadow-glow-emerald-sm text-text-light text-sm outline-none resize-none transition-all duration-300`}
-                        placeholder="Detail your parameters here..."
-                      />
-                      {errors.message && (
-                        <span className="font-mono text-[10px] text-red-500 mt-1">{errors.message}</span>
-                      )}
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full mt-2 py-3.5 px-6 rounded-xl bg-accent-green hover:bg-accent-secondary text-bg-primary font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-glow-emerald disabled:opacity-50"
+            <BorderGlow
+              borderRadius={24}
+              backgroundColor="rgba(13, 17, 39, 0.45)"
+              glowColor="210 85 55"
+              className="glassmorphic-card"
+            >
+              <div className="p-6 md:p-8 relative overflow-hidden w-full h-full">
+                <AnimatePresence mode="wait">
+                  {!success ? (
+                    <motion.form
+                      key="contact-form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onSubmit={handleSubmit}
+                      className="flex flex-col gap-6"
+                      noValidate
                     >
-                      {loading ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          <span>Dispatching parameters...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} />
-                          <span>Send Message</span>
-                        </>
-                      )}
-                    </button>
-                  </motion.form>
-                ) : (
-                  /* Success feedback panel with growing check */
-                  <motion.div
-                    key="success-card"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ type: 'spring', stiffness: 100, damping: 15 }}
-                    className="flex flex-col items-center justify-center text-center py-12"
-                  >
+                      {/* Name input */}
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="name" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
+                          Sender Name
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
+                            errors.name ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-blue'
+                          } focus:shadow-glow-blue-sm text-text-light text-sm outline-none transition-all duration-300`}
+                          placeholder="e.g. Jane Doe"
+                        />
+                        {errors.name && (
+                          <span className="font-mono text-[10px] text-red-500 mt-1">{errors.name}</span>
+                        )}
+                      </div>
+
+                      {/* Email input */}
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="email" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
+                            errors.email ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-blue'
+                          } focus:shadow-glow-blue-sm text-text-light text-sm outline-none transition-all duration-300`}
+                          placeholder="e.g. jane.doe@example.com"
+                        />
+                        {errors.email && (
+                          <span className="font-mono text-[10px] text-red-500 mt-1">{errors.email}</span>
+                        )}
+                      </div>
+
+                      {/* Subject input */}
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="subject" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
+                          Subject Heading
+                        </label>
+                        <input
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          value={form.subject}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
+                            errors.subject ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-blue'
+                          } focus:shadow-glow-blue-sm text-text-light text-sm outline-none transition-all duration-300`}
+                          placeholder="e.g. Collaborative project"
+                        />
+                        {errors.subject && (
+                          <span className="font-mono text-[10px] text-red-500 mt-1">{errors.subject}</span>
+                        )}
+                      </div>
+
+                      {/* Message textarea */}
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="message" className="font-mono text-[10px] uppercase text-text-secondary/40 tracking-wider">
+                          Message
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          value={form.message}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-xl bg-bg-primary border ${
+                            errors.message ? 'border-red-500/40 focus:border-red-500' : 'border-white/5 focus:border-accent-blue'
+                          } focus:shadow-glow-blue-sm text-text-light text-sm outline-none resize-none transition-all duration-300`}
+                          placeholder="Write your message here..."
+                        />
+                        {errors.message && (
+                          <span className="font-mono text-[10px] text-red-500 mt-1">{errors.message}</span>
+                        )}
+                      </div>
+
+                      {/* Submit Button */}
+                      <div className="relative w-full mt-2">
+                        <BorderGlow
+                          borderRadius={12}
+                          backgroundColor="transparent"
+                          glowColor="210 85 55"
+                          className="w-full"
+                        >
+                          <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full py-3.5 px-6 rounded-xl bg-accent-blue hover:bg-accent-secondary text-text-light hover:text-text-light font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
+                          >
+                            {loading ? (
+                              <>
+                                <Loader2 size={16} className="animate-spin" />
+                                <span>Sending message...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Send size={16} />
+                                <span>Send Message</span>
+                              </>
+                            )}
+                          </button>
+                        </BorderGlow>
+                      </div>
+                    </motion.form>
+                  ) : (
+                    /* Success feedback panel with growing check */
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
-                      className="w-16 h-16 rounded-full bg-accent-green/10 border border-accent-green/30 flex items-center justify-center text-accent-secondary mb-6 shadow-glow-emerald"
+                      key="success-card"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+                      className="flex flex-col items-center justify-center text-center py-12"
                     >
-                      <Check size={28} />
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
+                        className="w-16 h-16 rounded-full bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-accent-blue mb-6 shadow-glow-blue-sm"
+                      >
+                        <Check size={28} />
+                      </motion.div>
+                      <h3 className="font-sans font-extrabold text-xl text-text-light mb-2">
+                        Message Sent
+                      </h3>
+                      <p className="font-mono text-xs text-accent-blue mb-6">
+                        Status: Sent
+                      </p>
+                      <p className="text-text-secondary text-sm max-w-sm font-sans">
+                        Thank you for reaching out! Your message has been safely received, and I will get back to you shortly.
+                      </p>
                     </motion.div>
-                    <h3 className="font-sans font-extrabold text-xl text-text-light mb-2">
-                      Parameters Dispatched
-                    </h3>
-                    <p className="font-mono text-xs text-accent-secondary mb-6">
-                      LOG_STATUS: SUCCESS_200_OK
-                    </p>
-                    <p className="text-text-secondary text-sm max-w-sm font-sans">
-                      Thank you for formulating your message. Your parameters have been safely received, and I will get back to you shortly.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </BorderGlow>
           </div>
 
         </div>
@@ -332,3 +350,4 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+

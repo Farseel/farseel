@@ -11,7 +11,7 @@ const ScrollProgress: React.FC = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-green to-accent-secondary origin-left z-[1001]"
+      className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-blue to-accent-sky origin-left z-[1001]"
       style={{ scaleX }}
     />
   );

@@ -8,14 +8,15 @@ export default {
     extend: {
       colors: {
         bg: {
-          primary: '#0B0B0B',
-          secondary: '#111111',
-          card: '#171717',
+          primary: '#060814',
+          secondary: '#0a0d22',
+          card: '#0d1127',
         },
         accent: {
-          green: '#2FA84F',
-          secondary: '#6DD17C',
-          muted: '#3F6B52',
+          blue: '#3b82f6',
+          sky: '#38bdf8',
+          secondary: '#60a5fa',
+          muted: '#1e293b',
         },
         text: {
           light: '#F5F5F5',
@@ -27,8 +28,10 @@ export default {
         sans: ['Inter', 'Manrope', 'sans-serif'],
       },
       boxShadow: {
-        'glow-emerald': '0 0 25px rgba(47, 168, 79, 0.15)',
-        'glow-emerald-sm': '0 0 15px rgba(47, 168, 79, 0.08)',
+        'glow-blue': '0 0 25px rgba(59, 130, 246, 0.2)',
+        'glow-blue-sm': '0 0 15px rgba(59, 130, 246, 0.1)',
+        'glow-sky': '0 0 25px rgba(56, 189, 248, 0.2)',
+        'glow-sky-sm': '0 0 15px rgba(56, 189, 248, 0.1)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

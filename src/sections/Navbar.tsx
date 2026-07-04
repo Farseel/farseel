@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
       transition={{ duration: 0.3 }}
     >
       <nav className={`max-w-5xl mx-auto rounded-full border border-white/5 px-6 py-3 flex items-center justify-between transition-all duration-300 ${
-        scrolled ? 'bg-bg-card/75 backdrop-blur-md shadow-glow-emerald-sm' : 'bg-transparent'
+        scrolled ? 'bg-bg-card/75 backdrop-blur-md shadow-glow-blue-sm' : 'bg-transparent'
       }`}>
         {/* Brand Logo */}
         <a 
@@ -76,10 +76,10 @@ const Navbar: React.FC = () => {
           onClick={(e) => handleNavClick(e, 'home')}
           className="font-sans font-extrabold text-lg tracking-tight hover:opacity-80 transition-opacity"
         >
-          <span className="text-accent-secondary">[</span>
+          <span className="text-accent-blue">[</span>
           <span className="text-text-light">Farseel</span>
-          <span className="text-accent-green">.Dev</span>
-          <span className="text-accent-secondary">]</span>
+          <span className="text-accent-blue">.Dev</span>
+          <span className="text-accent-blue">]</span>
         </a>
 
         {/* Desktop Links */}
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
               {activeSection === item.id && (
                 <motion.div
                   layoutId="activeSectionIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-accent-green rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-accent-blue rounded-full"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}
@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
                 onClick={(e) => handleNavClick(e, item.id)}
                 className={`text-base font-semibold py-2 px-3 rounded-lg transition-colors ${
                   activeSection === item.id 
-                    ? 'bg-accent-green/10 text-accent-secondary' 
+                    ? 'bg-accent-blue/10 text-accent-sky' 
                     : 'text-text-secondary hover:bg-white/5 hover:text-text-light'
                 }`}
               >
