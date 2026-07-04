@@ -24,7 +24,6 @@ export const portfolioData = {
     name: 'Farseel M H',
     title: 'Full Stack Developer & ML Engineer',
     tagline: 'Building scalable web applications, intelligent ML systems, and production-ready software with a passion for clean architecture, performance, and user experience.',
-    resumeUrl: '#', // Default to anchor for template fallback
   },
   
   aboutMe: {

@@ -21,10 +21,10 @@ const Certifications: React.FC = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 25 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: 'spring', stiffness: 100, damping: 16 } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', stiffness: 100, damping: 16 }
     }
   };
 
@@ -135,6 +135,22 @@ const Certifications: React.FC = () => {
                       <span className="text-xs text-text-secondary/40">/ 10.0</span>
                     </div>
                   </div>
+                <p className="text-text-secondary text-sm leading-relaxed mb-6 font-sans">
+                  Completed B.Tech in Information Technology with Honours at {education.institution}. Engaged in deep training regarding system algorithms, database architectures, programming principles, and software implementation.
+                </p>
+              </div>
+
+              {/* Large CGPA digital output */}
+              <div className="border-t border-white/5 pt-6 flex items-center justify-between">
+                <span className="font-mono text-[10px] uppercase text-text-secondary tracking-widest">
+                  Academic Performance
+                </span>
+                <div className="flex items-baseline gap-1.5 font-mono">
+                  <span className="text-xs text-text-secondary">CGPA</span>
+                  <span className="text-3xl font-extrabold text-accent-secondary tracking-tight">
+                    {education.grade.split(' ')[1]}
+                  </span>
+                  <span className="text-xs text-text-secondary/40">/ 10.0</span>
                 </div>
               </BorderGlow>
             </motion.div>
