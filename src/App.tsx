@@ -8,64 +8,39 @@ import Timeline from './sections/Timeline';
 import Certifications from './sections/Certifications';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import ScrollProgress from './components/ScrollProgress';
-import SideRays from './components/SideRays';
+import { setLenis } from './lib/scroll';
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Initialize Lenis smooth scroll with premium kinetic physics
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 1.05,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
-      infinite: false,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.4,
     });
 
-    // Wire Lenis into standard requestAnimationFrame loop
+    let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frame = requestAnimationFrame(raf);
     };
+    frame = requestAnimationFrame(raf);
 
-    requestAnimationFrame(raf);
+    setLenis(lenis);
 
     return () => {
+      cancelAnimationFrame(frame);
+      setLenis(null);
       lenis.destroy();
     };
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-bg-primary text-text-light selection:bg-accent-blue/30 selection:text-text-light">
-      {/* Dynamic Noise Overlay */}
-      <div className="noise-overlay" />
-
-      {/* Global Background SideRays */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <SideRays
-          speed={2.5}
-          rayColor1="#1d4ed8"
-          rayColor2="#38bdf8"
-          intensity={2}
-          spread={2}
-          origin="top-right"
-          tilt={0}
-          saturation={1.5}
-          blend={0.75}
-          falloff={1.6}
-          opacity={0.4}
-        />
-      </div>
-
-      {/* Horizontal Scroll Progress Gauge */}
-      <ScrollProgress />
-
-      {/* Layout Grid */}
+    <div className="min-h-screen bg-paper text-ink">
       <Navbar />
-      <main className="relative z-10">
+      <main>
         <Hero />
         <About />
         <Projects />

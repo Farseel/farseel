@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { scrollToId } from '../lib/scroll';
+
+const navItems = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'timeline', label: 'Experience' },
+  { id: 'certifications', label: 'Credentials' },
+  { id: 'contact', label: 'Contact' },
+];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,141 +19,117 @@ const Navbar: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'timeline', label: 'Timeline' },
-    { id: 'certifications', label: 'Credentials' },
-    { id: 'contact', label: 'Contact' },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Scrolled styling
-      setScrolled(currentScrollY > 20);
+      setScrolled(currentScrollY > 24);
 
-      // Hide / Show logic
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setHidden(true); // Scrolling down, hide
+      if (currentScrollY > lastScrollY && currentScrollY > 160) {
+        setHidden(true);
       } else {
-        setHidden(false); // Scrolling up, show
+        setHidden(false);
       }
       setLastScrollY(currentScrollY);
 
-      // Active section highlight
-      const scrollPosition = currentScrollY + 120;
+      const probe = currentScrollY + 140;
       for (const item of navItems) {
         const el = document.getElementById(item.id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(item.id);
-          }
+        if (el && probe >= el.offsetTop && probe < el.offsetTop + el.offsetHeight) {
+          setActiveSection(item.id);
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setIsOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.offsetTop - 70;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
+    scrollToId(id);
   };
 
   return (
-    <motion.header
-      className={`fixed top-4 left-0 right-0 z-50 transition-all duration-300 w-full px-4`}
-      animate={{ y: hidden ? -100 : 0 }}
-      transition={{ duration: 0.3 }}
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-transform duration-300 ${hidden && !isOpen ? '-translate-y-full' : ''}`}
     >
-      <nav className={`max-w-5xl mx-auto rounded-full border border-white/5 px-6 py-3 flex items-center justify-between transition-all duration-300 ${
-        scrolled ? 'bg-bg-card/75 backdrop-blur-md shadow-glow-blue-sm' : 'bg-transparent'
-      }`}>
-        {/* Brand Logo */}
-        <a 
-          href="#home" 
-          onClick={(e) => handleNavClick(e, 'home')}
-          className="font-sans font-extrabold text-lg tracking-tight hover:opacity-80 transition-opacity"
-        >
-          <span className="text-accent-blue">[</span>
-          <span className="text-text-light">Farseel</span>
-          <span className="text-accent-blue">.Dev</span>
-          <span className="text-accent-blue">]</span>
-        </a>
+      <nav
+        className={`transition-colors duration-300 ${
+          scrolled || isOpen
+            ? 'bg-paper/90 backdrop-blur-md border-b border-line'
+            : 'bg-transparent border-b border-transparent'
+        }`}
+      >
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Wordmark */}
+          <a
+            href="#home"
+            onClick={(e) => handleNavClick(e, 'home')}
+            className="font-display text-xl tracking-tight hover:text-rust transition-colors"
+          >
+            Farseel<span className="text-rust">.</span>
+          </a>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <li key={item.id} className="relative">
-              <a
-                href={`#${item.id}`}
-                onClick={(e) => handleNavClick(e, item.id)}
-                className={`text-sm font-medium tracking-wide transition-colors duration-200 py-1 block ${
-                  activeSection === item.id ? 'text-text-light font-semibold' : 'text-text-secondary hover:text-text-light'
-                }`}
-              >
-                {item.label}
-              </a>
-              {activeSection === item.id && (
-                <motion.div
-                  layoutId="activeSectionIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-accent-blue rounded-full"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-            </li>
-          ))}
-        </ul>
+          {/* Desktop links */}
+          <ul className="hidden md:flex items-center gap-7">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={`text-[13.5px] transition-colors duration-200 ${
+                    activeSection === item.id
+                      ? 'text-ink font-medium'
+                      : 'text-ink-faint hover:text-ink'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Mobile Toggle Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-light hover:bg-white/10 transition-colors"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden w-9 h-9 flex items-center justify-center text-ink hover:text-rust transition-colors"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-20 left-4 right-4 bg-bg-card/95 border border-white/5 rounded-2xl p-6 shadow-2xl backdrop-blur-lg flex flex-col gap-4 md:hidden"
+            className="absolute top-16 inset-x-0 bg-paper border-b border-line md:hidden"
           >
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => handleNavClick(e, item.id)}
-                className={`text-base font-semibold py-2 px-3 rounded-lg transition-colors ${
-                  activeSection === item.id 
-                    ? 'bg-accent-blue/10 text-accent-sky' 
-                    : 'text-text-secondary hover:bg-white/5 hover:text-text-light'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+            <ul className="px-6 py-4">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                    className={`block py-3 text-base border-b border-line last:border-b-0 ${
+                      activeSection === item.id ? 'text-rust font-medium' : 'text-ink-soft'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 };
 

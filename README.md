@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# Farseel M H — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+My personal portfolio. Editorial design: warm paper background, ink text, a single
+rust accent, and a Fraunces / Hanken Grotesk / IBM Plex Mono type stack. Built by
+hand in React + TypeScript with Tailwind CSS and Lenis for smooth scrolling.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript** + **Vite**
+- **Tailwind CSS 3**
+- **Framer Motion** — quiet fade-up animations only
+- **Lenis** — smooth scrolling
+- **Lucide** icons (sparingly)
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # dev server
+npm run build    # type-check + production build
+npm run preview  # serve the production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Structure
+
+```
+src/
+├── App.tsx                  # Shell + Lenis setup
+├── sections/                # Navbar, Hero, About, Projects, Experience,
+│                            # Credentials, Contact, Footer
+├── components/
+│   └── SectionHeader.tsx    # Shared numbered section header
+├── lib/
+│   ├── scroll.ts            # Lenis singleton + scroll helpers
+│   └── motion.ts            # Shared easing / fade-up presets
+└── constants/
+    └── portfolioData.ts     # All copy and content lives here
+```
+
+The contact form composes an email in the visitor's own mail client via `mailto:` —
+no backend, nothing fake.

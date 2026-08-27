@@ -1,187 +1,90 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../constants/portfolioData';
-import BorderGlow from '../components/BorderGlow';
-
-// Custom inline SVG icons for Github
-const GithubIcon: React.FC<{ size?: number }> = ({ size = 16 }) => (
-  <svg viewBox="0 0 24 24" width={size} height={size} stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-  </svg>
-);
+import SectionHeader from '../components/SectionHeader';
+import { fadeUp } from '../lib/motion';
 
 const Projects: React.FC = () => {
   const { projects } = portfolioData;
-  const [sectionRef, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: 'spring', stiffness: 70, damping: 16 } 
-    }
-  };
 
   return (
-    <section id="projects" className="py-24 bg-bg-primary relative bg-grid">
-      <div className="absolute top-0 right-10 w-[1px] h-full bg-white/2 pointer-events-none" />
+    <section id="projects" className="py-20 md:py-28 bg-paper-deep/60">
+      <div className="max-w-5xl mx-auto px-6 border-t border-line pt-10 md:pt-12">
+        <SectionHeader num="02" label="Selected work" />
 
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="flex flex-col mb-16 relative">
-          <span className="font-mono text-xs uppercase tracking-widest text-accent-blue">
-            Creations
-          </span>
-          <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tight text-text-light mt-3">
-            Featured Projects
-          </h2>
-          <div className="w-16 h-[2px] bg-accent-blue mt-4" />
-        </div>
-
-        {/* Projects Grid */}
-        <motion.div
-          ref={sectionRef}
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="flex flex-col gap-16"
-        >
+        <div className="mt-12 md:mt-16 flex flex-col">
           {projects.map((project, idx) => (
             <motion.article
               key={idx}
-              variants={cardVariants}
+              {...fadeUp(idx * 0.06)}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 py-14 md:py-16 border-t border-line group"
             >
-              <BorderGlow
-                borderRadius={24}
-                backgroundColor="rgba(13, 17, 39, 0.45)"
-                glowColor="210 85 55"
-                className="glassmorphic-card group transition-all duration-300 hover:scale-[1.01]"
-              >
-                <div className="p-6 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 w-full h-full relative">
-                  {/* Grid watermarks */}
-                  <div className="absolute top-4 right-6 font-mono text-[9px] text-text-secondary/10 pointer-events-none select-none">
-                    PROJ-0{idx + 1}
-                  </div>
+              {/* Left rail: ghost number + honest metrics */}
+              <div className="lg:col-span-4 flex lg:flex-col justify-between items-start lg:gap-10 order-2 lg:order-1">
+                <span
+                  aria-hidden
+                  className="font-display font-light leading-none text-6xl md:text-7xl text-ink/[0.14] select-none"
+                >
+                  0{idx + 1}
+                </span>
 
-                  {/* Graphical Panel Mockup */}
-                  <div className="lg:w-5/12 shrink-0 flex flex-col gap-4">
-                    {project.type === 'dashboard' ? (
-                      /* High Concurrency Ticketing Visual Dashboard */
-                      <div className="h-60 rounded-2xl bg-bg-primary/60 border border-white/5 p-4 flex flex-col justify-between overflow-hidden relative font-mono text-[9px] text-accent-blue/60">
-                        <div className="flex items-center justify-between border-b border-white/5 pb-2">
-                          <span>BOOKING_STREAM::LOAD_BALANCER</span>
-                          <span className="w-2 h-2 rounded-full bg-accent-blue animate-ping" />
-                        </div>
-                        {/* Ticketing Bar Graphs */}
-                        <div className="flex items-end gap-2 h-24 mt-2">
-                          <div className="w-full bg-accent-muted/20 border border-accent-muted/40 rounded-t h-[60%] flex items-end justify-center pb-1 text-[8px]">90k req/s</div>
-                          <div className="w-full bg-accent-blue/20 border border-accent-blue/40 rounded-t h-[95%] flex items-end justify-center pb-1 text-[8px]">142k req/s</div>
-                          <div className="w-full bg-accent-muted/20 border border-accent-muted/40 rounded-t h-[75%] flex items-end justify-center pb-1 text-[8px]">110k req/s</div>
-                        </div>
-                        <div className="flex justify-between items-center text-[8px] text-text-secondary/40 border-t border-white/5 pt-2">
-                          <span>REDIS_LOCK: active</span>
-                          <span>DB_POOL: 100/100</span>
-                        </div>
+                {project.metrics && (
+                  <div className="flex gap-10 lg:gap-8 lg:flex-col lg:mt-2">
+                    {project.metrics.map((metric) => (
+                      <div key={metric.label}>
+                        <p className="meta-label">{metric.label}</p>
+                        <p className="mt-1.5 font-display text-3xl md:text-4xl tracking-tight text-rust-deep">
+                          {metric.value}
+                        </p>
                       </div>
-                    ) : (
-                      /* BMI Predictor model output report card */
-                      <div className="h-60 rounded-2xl bg-bg-primary/60 border border-white/5 p-6 flex flex-col justify-between overflow-hidden relative">
-                        <div className="flex items-center justify-between border-b border-white/5 pb-2 font-mono text-[9px] text-accent-blue/60">
-                          <span>TENSORFLOW_CNN::EVAL_METRICS</span>
-                          <span>LOSS: 0.041</span>
-                        </div>
-                        {/* LCD style metrics display */}
-                        <div className="grid grid-cols-2 gap-4 my-auto">
-                          {project.metrics?.map((m, mIdx) => (
-                            <div key={mIdx} className="bg-bg-secondary/60 p-4 rounded-xl border border-white/5 flex flex-col items-center">
-                              <span className="text-[10px] font-mono text-text-secondary uppercase tracking-wider">{m.label}</span>
-                              <span className="text-xl md:text-2xl font-mono text-accent-blue font-bold mt-1 tracking-tight">{m.value}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="text-[8px] font-mono text-text-secondary/30 text-center">
-                          Model evaluation completed: precision verified
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Tech stacks list */}
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {project.techStack.map((tech, tIdx) => (
-                        <span 
-                          key={tIdx}
-                          className="px-2 py-0.5 rounded bg-bg-secondary/60 border border-white/5 text-[10px] font-mono text-text-secondary"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    ))}
                   </div>
+                )}
+              </div>
 
-                  {/* Details and highlights */}
-                  <div className="flex flex-col justify-between py-2">
-                    <div>
-                      <h3 className="text-2xl font-sans font-extrabold text-text-light mb-3 group-hover:text-accent-blue transition-colors duration-200">
-                        {project.title}
-                      </h3>
-                      <p className="text-text-secondary text-sm leading-relaxed mb-6 font-sans">
-                        {project.description}
-                      </p>
+              {/* Main content */}
+              <div className="lg:col-span-8 order-1 lg:order-2">
+                <h3 className="font-display text-3xl md:text-4xl tracking-[-0.015em] leading-tight group-hover:text-rust transition-colors duration-300">
+                  {project.title}
+                </h3>
 
-                      <ul className="flex flex-col gap-2.5">
-                        {project.highlights.map((bullet, bIdx) => (
-                          <li key={bIdx} className="flex items-start gap-3 text-xs text-text-secondary leading-normal">
-                            <span className="text-accent-blue mt-1 font-mono text-[10px] select-none">▶</span>
-                            <span className="font-sans">{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                <p className="mt-4 max-w-prose text-[15px] leading-relaxed text-ink-soft">
+                  {project.description}
+                </p>
 
-                    <div className="flex items-center gap-4 mt-8">
-                      <a
-                        href="https://github.com/Farseel"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-xs font-mono font-medium text-text-secondary hover:text-accent-blue transition-colors"
-                      >
-                        <GithubIcon size={14} />
-                        Source Code
-                      </a>
-                      <span className="w-1 h-1 rounded-full bg-white/10" />
-                      <a
-                        href="https://github.com/Farseel"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-xs font-mono font-medium text-text-secondary hover:text-accent-blue transition-colors"
-                      >
-                        <ExternalLink size={14} />
-                        Live Demo
-                      </a>
-                    </div>
-                  </div>
+                <ul className="mt-6 space-y-2.5 max-w-prose">
+                  {project.highlights.map((highlight, hIdx) => (
+                    <li key={hIdx} className="flex items-baseline gap-3 text-sm leading-relaxed text-ink-soft">
+                      <span aria-hidden className="text-rust select-none shrink-0">—</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mt-7 font-mono text-[11px] leading-relaxed tracking-[0.02em] text-ink-faint">
+                  {project.techStack.join(' · ')}
+                </p>
+
+                <div className="mt-6 flex items-center gap-6">
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline text-sm text-ink flex items-center gap-1"
+                  >
+                    Source code
+                    <ArrowUpRight size={14} strokeWidth={2} />
+                  </a>
                 </div>
-              </BorderGlow>
+              </div>
             </motion.article>
           ))}
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );
 };
 
 export default Projects;
-

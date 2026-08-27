@@ -4,7 +4,7 @@ export interface ProjectType {
   highlights: string[];
   techStack: string[];
   metrics?: { label: string; value: string }[];
-  type: 'dashboard' | 'prediction';
+  repoUrl: string;
 }
 
 export interface TimelineItemType {
@@ -22,123 +22,96 @@ export interface CertificationType {
 export const portfolioData = {
   personalInfo: {
     name: 'Farseel M H',
-    title: 'Full Stack Developer & ML Engineer',
-    tagline: 'Building scalable web applications, intelligent ML systems, and production-ready software with a passion for clean architecture, performance, and user experience.',
-    resumeUrl: '#', // Default to anchor for template fallback
+    firstName: 'Farseel',
+    title: 'Full-stack developer & machine-learning engineer',
+    tagline:
+      'I build web applications end to end and train machine-learning models that hold up outside a notebook. Final-year IT student, based in Nagercoil, India — currently looking for roles where I can ship real software.',
   },
-  
+
   aboutMe: {
     bio: [
-      "I am a Software Engineer specializing in Full Stack Development and Machine Learning.",
-      "I enjoy building scalable web applications using the MERN stack while also developing intelligent machine learning solutions using TensorFlow and Scikit-learn.",
-      "My interests span across backend architecture, frontend engineering, cloud deployment, MLOps, system design, and performance optimization. I enjoy transforming complex ideas into production-ready applications that solve real-world problems."
-    ]
+      "I'm Farseel, a final-year Information Technology student at Kamaraj College of Engineering and Technology. Most days I'm building web applications the whole way through — React on the front, Node or FastAPI behind it, PostgreSQL or MongoDB underneath.",
+      "Lately I've been going deeper on machine learning: training models in TensorFlow and scikit-learn, being picky about feature engineering and evaluation, then wrapping them behind APIs people can actually use. Two internships later — one building ML pipelines at Feather Softwares, one writing production web UI at Profenaa Technologies — I've learned that good software is mostly unglamorous care: readable code, honest tests, boring reliable deploys.",
+    ],
   },
 
   skills: [
-    {
-      category: 'Languages',
-      items: ['JavaScript (ES6+)', 'TypeScript', 'Python', 'Java', 'C'],
-    },
-    {
-      category: 'Frontend',
-      items: ['React.js', 'Angular', 'HTML5', 'CSS3', 'Responsive Design'],
-    },
-    {
-      category: 'Backend',
-      items: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'JWT', 'OAuth'],
-    },
-    {
-      category: 'Databases',
-      items: ['PostgreSQL', 'MongoDB', 'Redis', 'SQL'],
-    },
-    {
-      category: 'Machine Learning',
-      items: ['TensorFlow', 'Scikit-learn', 'CNN', 'NumPy', 'Pandas', 'Feature Engineering', 'Model Deployment'],
-    },
-    {
-      category: 'Cloud & DevOps',
-      items: ['Docker', 'Microsoft Azure', 'CI/CD Pipelines', 'Git', 'GitHub', 'GitLab'],
-    },
-    {
-      category: 'Engineering',
-      items: ['System Design', 'Object-Oriented Programming', 'Data Structures', 'Algorithms', 'Performance Optimization'],
-    }
+    { category: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C'] },
+    { category: 'Frontend', items: ['React.js', 'Angular', 'HTML5', 'CSS3', 'Responsive design'] },
+    { category: 'Backend', items: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'JWT', 'OAuth'] },
+    { category: 'Data', items: ['PostgreSQL', 'MongoDB', 'Redis', 'SQL'] },
+    { category: 'Machine learning', items: ['TensorFlow', 'scikit-learn', 'CNNs', 'NumPy', 'Pandas'] },
+    { category: 'Cloud & tooling', items: ['Docker', 'Azure', 'CI/CD pipelines', 'Git'] },
+    { category: 'Foundations', items: ['System design', 'OOP', 'Data structures & algorithms'] },
   ],
 
   projects: [
     {
-      title: 'High-Concurrency Event Ticketing System',
-      description: 'Designed and developed a distributed full-stack ticket booking platform capable of handling high-concurrency traffic.',
+      title: 'High-concurrency event ticketing system',
+      description:
+        'A ticket-booking platform built around one genuinely hard problem: hundreds of people trying to grab the same seats at the same moment.',
       highlights: [
-        'Developed secure REST APIs using Node.js and Express.js',
-        'Implemented JWT Authentication and OAuth integration',
-        'Used PostgreSQL database and implemented Redis distributed locking to prevent race conditions',
-        'Containerized using Docker and configured CI/CD pipelines to deploy on Microsoft Azure',
-        'Optimized database queries, significantly reducing API latency and improving throughput'
+        'Redis-backed distributed locks keep checkout race-free when inventory gets contested',
+        'Session handling over Express REST APIs using JWT and OAuth',
+        'Query tuning and pooling that cut API latency noticeably under load',
+        'Ships as Docker containers through CI/CD onto Azure',
       ],
-      techStack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Redis', 'Docker', 'Azure', 'JWT', 'OAuth'],
-      type: 'dashboard'
+      techStack: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Redis', 'Docker', 'Azure'],
+      repoUrl: 'https://github.com/Farseel',
     },
     {
-      title: 'BMI Prediction & Health Recommendation System',
-      description: 'Developed an intelligent healthcare application that predicts BMI using deep learning models and provides personalized health recommendations.',
+      title: 'BMI prediction & health recommendation',
+      description:
+        'A CNN model that estimates height and weight from an image, then turns those numbers into plain-language health suggestions.',
       highlights: [
-        'Built deep learning models using TensorFlow CNN architectures',
-        'Developed API endpoints using FastAPI inside Docker containers',
-        'Conducted feature engineering and hyperparameter tuning',
-        'Integrated ML inference pipeline into standard MERN stack',
-        'Created modular dashboards displaying client health indicators'
+        'TensorFlow CNN trained with iterative feature engineering and hyperparameter sweeps',
+        'FastAPI inference service, containerised and wired straight into the MERN frontend',
+        'Dashboard surfaces health indicators next to the metrics that produced them',
       ],
-      techStack: ['React', 'Node.js', 'FastAPI', 'MongoDB', 'TensorFlow', 'Docker', 'Python', 'NumPy', 'Pandas', 'Feature Engineering'],
+      techStack: ['React', 'Node.js', 'FastAPI', 'MongoDB', 'TensorFlow', 'Python', 'NumPy', 'Pandas'],
       metrics: [
-        { label: 'Weight MAE', value: '9.8 kg' },
-        { label: 'Height MAE', value: '6.2 cm' }
+        { label: 'Weight error', value: '9.8 kg' },
+        { label: 'Height error', value: '6.2 cm' },
       ],
-      type: 'prediction'
-    }
+      repoUrl: 'https://github.com/Farseel',
+    },
   ] as ProjectType[],
 
   timeline: [
     {
       role: 'Machine Learning Intern',
       company: 'Feather Softwares',
-      date: 'Dec 2025 – Jan 2026',
+      date: 'Dec 2025 — Jan 2026',
       bullets: [
-        'Developed predictive ML models using TensorFlow and Scikit-learn pipelines.',
-        'Conducted feature engineering and hyperparameter cross-validation protocols.',
-        'Structured and preprocessed tabular datasets using Pandas and NumPy libraries.',
-        'Evaluated models based on key parameters including Precision, Recall, F1 Score, and AUC metrics.'
-      ]
+        'Built predictive models with TensorFlow and scikit-learn, starting from messy raw tables.',
+        'Engineered features and cross-validated against precision, recall, F1 and AUC rather than accuracy alone.',
+        'Prepped datasets with Pandas and NumPy — learned to distrust data before trusting models.',
+      ],
     },
     {
       role: 'Web Developer Intern',
       company: 'Profenaa Technologies',
       date: 'Jun 2024',
       bullets: [
-        'Developed responsive user interfaces using HTML5, CSS3, and JavaScript.',
-        'Optimized code structure and debugged code files using Git version control.',
-        'Participated in unit testing, debugging, and initial CI/CD pipeline deployments.'
-      ]
-    }
+        'Built responsive interfaces with HTML, CSS and vanilla JavaScript.',
+        'Picked up real Git discipline — branching, reviewing, undoing my own mistakes.',
+        'Sat in on unit testing and first-pass CI/CD pipeline deployments.',
+      ],
+    },
   ] as TimelineItemType[],
 
   certifications: [
-    {
-      name: 'Java Full Stack',
-      issuer: 'Wipro'
-    },
-    {
-      name: 'Java Certified Foundations Associate',
-      issuer: 'Oracle'
-    }
+    { name: 'Java Certified Foundations Associate', issuer: 'Oracle' },
+    { name: 'Java Full Stack', issuer: 'Wipro' },
   ] as CertificationType[],
 
   education: {
     degree: 'B.Tech Information Technology (Honours)',
-    institution: 'Kamaraj College of Engineering and Technology, Madurai',
+    institution: 'Kamaraj College of Engineering and Technology',
+    place: 'Madurai',
     duration: '2022 – 2026',
-    grade: 'CGPA 8.25'
+    grade: '8.25',
+    gradeLabel: 'CGPA',
   },
 
   contactInfo: {
@@ -146,6 +119,9 @@ export const portfolioData = {
     phone: '+91 63853 18752',
     location: 'Nagercoil, India',
     github: 'https://github.com/Farseel',
-    linkedin: 'https://linkedin.com/in/farseel-m-h'
-  }
+    linkedin: 'https://linkedin.com/in/farseel-m-h',
+  },
+
+  contactBlurb:
+    "Whether it's a role, an internship, or a project you want a second pair of eyes on — my inbox is open. I usually reply within a day.",
 };
