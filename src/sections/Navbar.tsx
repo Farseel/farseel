@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
       <nav
         className={`transition-colors duration-300 ${
           scrolled || isOpen
-            ? 'bg-paper/90 backdrop-blur-md border-b border-line'
+            ? 'bg-base/90 backdrop-blur-md border-b border-line'
             : 'bg-transparent border-b border-transparent'
         }`}
       >
@@ -66,9 +66,9 @@ const Navbar: React.FC = () => {
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, 'home')}
-            className="font-display text-xl tracking-tight hover:text-rust transition-colors"
+            className="font-display text-xl tracking-tight hover:text-brass transition-colors"
           >
-            Farseel<span className="text-rust">.</span>
+            Farseel<span className="text-brass">.</span>
           </a>
 
           {/* Desktop links */}
@@ -80,8 +80,8 @@ const Navbar: React.FC = () => {
                   onClick={(e) => handleNavClick(e, item.id)}
                   className={`text-[13.5px] transition-colors duration-200 ${
                     activeSection === item.id
-                      ? 'text-ink font-medium'
-                      : 'text-ink-faint hover:text-ink'
+                      ? 'text-cream font-medium'
+                      : 'text-cream-faint hover:text-cream'
                   }`}
                 >
                   {item.label}
@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-9 h-9 flex items-center justify-center text-ink hover:text-rust transition-colors"
+            className="md:hidden w-9 h-9 flex items-center justify-center text-cream hover:text-brass transition-colors"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-16 inset-x-0 bg-paper border-b border-line md:hidden"
+            className="absolute top-16 inset-x-0 bg-base border-b border-line md:hidden"
           >
             <ul className="px-6 py-4">
               {navItems.map((item) => (
@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
                     className={`block py-3 text-base border-b border-line last:border-b-0 ${
-                      activeSection === item.id ? 'text-rust font-medium' : 'text-ink-soft'
+                      activeSection === item.id ? 'text-brass font-medium' : 'text-cream-muted'
                     }`}
                   >
                     {item.label}

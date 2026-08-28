@@ -53,8 +53,8 @@ const Contact: React.FC = () => {
   };
 
   const inputClass = (hasError?: string) =>
-    `w-full bg-transparent border-b py-3 text-[15px] text-ink placeholder:text-ink-faint/70 outline-none transition-colors duration-300 ${
-      hasError ? 'border-rust-deep' : 'border-line focus:border-ink'
+    `w-full bg-transparent border-b py-3 text-[15px] text-cream placeholder:text-cream-faint/60 outline-none transition-colors duration-300 ${
+      hasError ? 'border-terra' : 'border-line focus:border-brass'
     }`;
 
   return (
@@ -67,31 +67,31 @@ const Contact: React.FC = () => {
           <div className="lg:col-span-5">
             <motion.h2
               {...fadeUp()}
-              className="font-display text-3xl md:text-4xl leading-[1.15] tracking-[-0.015em]"
+              className="font-display text-3xl md:text-4xl leading-[1.15] tracking-[-0.015em] text-cream"
             >
-              Say hello<span className="text-rust">.</span>
+              Say hello<span className="text-brass">.</span>
               <br />
-              <span className="italic font-light text-ink-soft">Really, it works.</span>
+              <span className="italic text-cream-muted">Really, it works.</span>
             </motion.h2>
 
-            <motion.p {...fadeUp(0.08)} className="mt-6 max-w-sm text-[15px] leading-[1.8] text-ink-soft">
+            <motion.p {...fadeUp(0.08)} className="mt-6 max-w-sm text-[15px] leading-[1.8] text-cream-muted">
               {portfolioData.contactBlurb}
             </motion.p>
 
             <motion.div {...fadeUp(0.14)} className="mt-9 flex flex-col gap-3">
-              <a href={`mailto:${email}`} className="link-underline text-sm text-ink w-fit">
+              <a href={`mailto:${email}`} className="link-underline text-sm text-cream w-fit">
                 {email}
               </a>
-              <a href={`tel:${phone.replace(/\s/g, '')}`} className="link-underline text-sm text-ink w-fit">
+              <a href={`tel:${phone.replace(/\s/g, '')}`} className="link-underline text-sm text-cream w-fit">
                 {phone}
               </a>
             </motion.div>
 
             <motion.div {...fadeUp(0.2)} className="mt-9 flex items-center gap-6">
-              <a href={github} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-ink-soft">
+              <a href={github} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-cream-muted">
                 GitHub
               </a>
-              <a href={linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-ink-soft">
+              <a href={linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-cream-muted">
                 LinkedIn
               </a>
             </motion.div>
@@ -115,7 +115,7 @@ const Contact: React.FC = () => {
                       Name
                     </label>
                     <input type="text" id="name" name="name" value={form.name} onChange={handleChange} className={inputClass(errors.name)} placeholder="Your name" />
-                    {errors.name && <p className="mt-1.5 text-xs text-rust-deep">{errors.name}</p>}
+                    {errors.name && <p className="mt-1.5 text-xs text-terra">{errors.name}</p>}
                   </div>
 
                   <div>
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
                       Email
                     </label>
                     <input type="email" id="email" name="email" value={form.email} onChange={handleChange} className={inputClass(errors.email)} placeholder="you@example.com" />
-                    {errors.email && <p className="mt-1.5 text-xs text-rust-deep">{errors.email}</p>}
+                    {errors.email && <p className="mt-1.5 text-xs text-terra">{errors.email}</p>}
                   </div>
 
                   <div className="sm:col-span-2">
@@ -131,7 +131,7 @@ const Contact: React.FC = () => {
                       Subject
                     </label>
                     <input type="text" id="subject" name="subject" value={form.subject} onChange={handleChange} className={inputClass(errors.subject)} placeholder="What's this about?" />
-                    {errors.subject && <p className="mt-1.5 text-xs text-rust-deep">{errors.subject}</p>}
+                    {errors.subject && <p className="mt-1.5 text-xs text-terra">{errors.subject}</p>}
                   </div>
 
                   <div className="sm:col-span-2">
@@ -139,17 +139,17 @@ const Contact: React.FC = () => {
                       Message
                     </label>
                     <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange} className={`${inputClass(errors.message)} resize-none`} placeholder="Go ahead…" />
-                    {errors.message && <p className="mt-1.5 text-xs text-rust-deep">{errors.message}</p>}
+                    {errors.message && <p className="mt-1.5 text-xs text-terra">{errors.message}</p>}
                   </div>
 
                   <div className="sm:col-span-2 flex items-center justify-between gap-6 flex-wrap">
                     <button
                       type="submit"
-                      className="px-7 py-3.5 bg-ink text-paper text-sm font-medium rounded-sm hover:bg-rust active:bg-rust-deep transition-colors duration-300"
+                      className="px-7 py-3.5 bg-cream text-ink text-sm font-medium rounded-sm hover:bg-brass transition-colors duration-300"
                     >
                       Send message
                     </button>
-                    <p className="text-xs text-ink-faint">
+                    <p className="text-xs text-cream-faint">
                       Opens your own mail app — no forms disappearing into the void.
                     </p>
                   </div>
@@ -163,12 +163,12 @@ const Contact: React.FC = () => {
                   transition={{ duration: 0.4 }}
                   className="border-t border-line pt-8"
                 >
-                  <h3 className="font-display italic font-light text-2xl text-ink-soft">
+                  <h3 className="font-display italic text-2xl text-cream-muted">
                     Your mail app should be opening.
                   </h3>
-                  <p className="mt-3 text-sm text-ink-faint max-w-sm leading-relaxed">
+                  <p className="mt-3 text-sm text-cream-faint max-w-sm leading-relaxed">
                     If nothing happened, email me directly at{' '}
-                    <a href={`mailto:${email}`} className="link-underline text-ink">
+                    <a href={`mailto:${email}`} className="link-underline text-cream">
                       {email}
                     </a>
                     .

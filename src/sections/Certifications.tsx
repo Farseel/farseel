@@ -8,7 +8,7 @@ const Certifications: React.FC = () => {
   const { certifications } = portfolioData;
 
   return (
-    <section id="certifications" className="py-20 md:py-28 bg-paper-deep/60">
+    <section id="certifications" className="py-20 md:py-28 bg-raised">
       <div className="max-w-5xl mx-auto px-6 border-t border-line pt-10 md:pt-12">
         <SectionHeader num="04" label="Credentials" />
 
@@ -25,8 +25,8 @@ const Certifications: React.FC = () => {
                   key={idx}
                   className="py-4 border-t border-line first:border-t-0 last:border-b last:border-line flex items-baseline justify-between gap-4"
                 >
-                  <span className="text-sm font-medium text-ink">{cert.name}</span>
-                  <span className="shrink-0 text-xs text-ink-faint">{cert.issuer}</span>
+                  <span className="text-sm font-medium text-cream">{cert.name}</span>
+                  <span className="shrink-0 text-xs text-cream-faint">{cert.issuer}</span>
                 </li>
               ))}
             </ul>
@@ -36,13 +36,13 @@ const Certifications: React.FC = () => {
           <div>
             <p className="meta-label mb-5">Degree</p>
             <div className="py-4 border-t border-line first:border-t-0">
-              <p className="text-sm font-medium text-ink leading-relaxed">
+              <p className="text-sm font-medium text-cream leading-relaxed">
                 {portfolioData.education.degree}
               </p>
-              <p className="mt-1.5 text-sm text-ink-faint leading-relaxed">
+              <p className="mt-1.5 text-sm text-cream-faint leading-relaxed">
                 {portfolioData.education.institution}, {portfolioData.education.place}
               </p>
-              <p className="mt-3 text-sm text-ink-soft">
+              <p className="mt-3 text-sm text-cream-muted">
                 {portfolioData.education.duration} · {portfolioData.education.gradeLabel}{' '}
                 {portfolioData.education.grade}/10
               </p>

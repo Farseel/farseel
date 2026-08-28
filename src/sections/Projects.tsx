@@ -9,7 +9,7 @@ const Projects: React.FC = () => {
   const { projects } = portfolioData;
 
   return (
-    <section id="projects" className="py-20 md:py-28 bg-paper-deep/60">
+    <section id="projects" className="py-20 md:py-28 bg-raised">
       <div className="max-w-5xl mx-auto px-6 border-t border-line pt-10 md:pt-12">
         <SectionHeader num="02" label="Selected work" />
 
@@ -24,7 +24,7 @@ const Projects: React.FC = () => {
               <div className="lg:col-span-4 flex lg:flex-col justify-between items-start lg:gap-10 order-2 lg:order-1">
                 <span
                   aria-hidden
-                  className="font-display font-light leading-none text-6xl md:text-7xl text-ink/[0.14] select-none"
+                  className="font-display font-light leading-none text-6xl md:text-7xl text-cream/[0.09] select-none"
                 >
                   0{idx + 1}
                 </span>
@@ -34,7 +34,7 @@ const Projects: React.FC = () => {
                     {project.metrics.map((metric) => (
                       <div key={metric.label}>
                         <p className="meta-label">{metric.label}</p>
-                        <p className="mt-1.5 font-display text-3xl md:text-4xl tracking-tight text-rust-deep">
+                        <p className="mt-1.5 font-display text-3xl md:text-4xl tracking-tight text-brass">
                           {metric.value}
                         </p>
                       </div>
@@ -45,24 +45,24 @@ const Projects: React.FC = () => {
 
               {/* Main content */}
               <div className="lg:col-span-8 order-1 lg:order-2">
-                <h3 className="font-display text-3xl md:text-4xl tracking-[-0.015em] leading-tight group-hover:text-rust transition-colors duration-300">
+                <h3 className="font-display text-3xl md:text-4xl tracking-[-0.015em] leading-tight text-cream group-hover:text-brass transition-colors duration-300">
                   {project.title}
                 </h3>
 
-                <p className="mt-4 max-w-prose text-[15px] leading-relaxed text-ink-soft">
+                <p className="mt-4 max-w-prose text-[15px] leading-relaxed text-cream-muted">
                   {project.description}
                 </p>
 
                 <ul className="mt-6 space-y-2.5 max-w-prose">
                   {project.highlights.map((highlight, hIdx) => (
-                    <li key={hIdx} className="flex items-baseline gap-3 text-sm leading-relaxed text-ink-soft">
-                      <span aria-hidden className="text-rust select-none shrink-0">—</span>
+                    <li key={hIdx} className="flex items-baseline gap-3 text-sm leading-relaxed text-cream-muted">
+                      <span aria-hidden className="text-brass select-none shrink-0">—</span>
                       <span>{highlight}</span>
                     </li>
                   ))}
                 </ul>
 
-                <p className="mt-7 font-mono text-[11px] leading-relaxed tracking-[0.02em] text-ink-faint">
+                <p className="mt-7 font-mono text-[11px] leading-relaxed tracking-[0.02em] text-cream-faint">
                   {project.techStack.join(' · ')}
                 </p>
 
@@ -71,16 +71,15 @@ const Projects: React.FC = () => {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline text-sm text-ink flex items-center gap-1"
+                    className="link-underline text-sm text-cream flex items-center gap-1"
                   >
-                    Source code
-                    <ArrowUpRight size={14} strokeWidth={2} />
+                    <span>Source code</span>
+                    <ArrowUpRight size={14} strokeWidth={2} className="relative top-[1px]" />
                   </a>
                 </div>
               </div>
             </motion.article>
           ))}
-
         </div>
       </div>
     </section>

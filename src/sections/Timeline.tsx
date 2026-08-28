@@ -21,22 +21,22 @@ const Timeline: React.FC = () => {
             >
               {/* Date column */}
               <div className="md:pt-1.5">
-                <p className="font-mono text-xs tracking-[0.04em] text-rust-deep">{item.date}</p>
-                <p className="mt-1.5 text-sm text-ink-faint">{item.company}</p>
+                <p className="font-mono text-xs tracking-[0.04em] text-brass">{item.date}</p>
+                <p className="mt-1.5 text-sm text-cream-faint">{item.company}</p>
               </div>
 
               {/* Role + notes */}
               <div>
-                <h3 className="font-display text-2xl md:text-[1.75rem] tracking-[-0.01em]">
+                <h3 className="font-display text-2xl md:text-[1.75rem] tracking-[-0.01em] text-cream">
                   {item.role}
-                  <span className="text-ink-faint"> · </span>
-                  <span className="italic font-light text-ink-soft">{item.company}</span>
+                  <span className="text-cream-faint"> · </span>
+                  <span className="italic text-cream-muted">{item.company}</span>
                 </h3>
 
                 <ul className="mt-5 space-y-2 max-w-prose">
                   {item.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-baseline gap-3 text-sm leading-relaxed text-ink-soft">
-                      <span aria-hidden className="text-rust select-none shrink-0">—</span>
+                    <li key={bIdx} className="flex items-baseline gap-3 text-sm leading-relaxed text-cream-muted">
+                      <span aria-hidden className="text-brass select-none shrink-0">—</span>
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -50,14 +50,14 @@ const Timeline: React.FC = () => {
         <motion.div {...fadeUp()} className="border-t border-line py-12 md:py-14">
           <p className="meta-label mb-6">Education</p>
           <div className="grid grid-cols-1 md:grid-cols-[210px_1fr] gap-x-14 gap-y-2">
-            <p className="font-mono text-xs tracking-[0.04em] text-rust-deep pt-0.5">
+            <p className="font-mono text-xs tracking-[0.04em] text-brass pt-0.5">
               {portfolioData.education.duration}
             </p>
             <div>
-              <h3 className="font-display text-xl md:text-2xl tracking-[-0.01em]">
+              <h3 className="font-display text-xl md:text-2xl tracking-[-0.01em] text-cream">
                 {portfolioData.education.degree}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+              <p className="mt-2 text-sm leading-relaxed text-cream-muted">
                 {portfolioData.education.institution}, {portfolioData.education.place} ·{' '}
                 {portfolioData.education.gradeLabel} {portfolioData.education.grade}/10
               </p>

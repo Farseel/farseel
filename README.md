@@ -1,8 +1,8 @@
 # Farseel M H — Portfolio
 
-My personal portfolio. Editorial design: warm paper background, ink text, a single
-rust accent, and a Fraunces / Hanken Grotesk / IBM Plex Mono type stack. Built by
-hand in React + TypeScript with Tailwind CSS and Lenis for smooth scrolling.
+My personal portfolio. Editorial design: warm charcoal background, cream type, a
+single brass accent, and a Fraunces / Hanken Grotesk / IBM Plex Mono type stack.
+Built by hand in React + TypeScript with Tailwind CSS and Lenis for smooth scrolling.
 
 ## Stack
 

@@ -5,12 +5,12 @@
 @layer base {
   html {
     scroll-behavior: initial; /* Lenis handles smooth scrolling */
-    background-color: #f6f3eb;
+    background-color: #161411;
   }
 
   body {
-    background-color: #f6f3eb;
-    color: #1c1a15;
+    background-color: #161411;
+    color: #f2ede1;
     font-family: 'Hanken Grotesk', system-ui, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
@@ -19,12 +19,12 @@
   }
 
   ::selection {
-    background: rgba(164, 78, 26, 0.22);
-    color: #1c1a15;
+    background: rgba(201, 164, 92, 0.3);
+    color: #f2ede1;
   }
 
   :focus-visible {
-    outline: 2px solid #a44e1a;
+    outline: 2px solid #c9a45c;
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -33,7 +33,7 @@
 @layer utilities {
   /* Small uppercase metadata label (used sparingly) */
   .meta-label {
-    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ink-faint;
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-cream-faint;
   }
 
   /* Inline link with a hand-set underline that thickens on hover */
@@ -47,13 +47,8 @@
   }
 
   .link-underline:hover {
-    color: #7e3a10;
+    color: #e2c689;
     background-size: 100% 2px;
-  }
-
-  /* Underline only while hovered — used on nav links */
-  .nav-link {
-    @apply relative py-1 transition-colors duration-200;
   }
 }
 
@@ -62,13 +57,13 @@
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f6f3eb;
+  background: #161411;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d8d0c0;
+  background: #453f35;
   border-radius: 9999px;
-  border: 3px solid #f6f3eb;
+  border: 3px solid #161411;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c4bba8;
+  background: #57503f;
 }

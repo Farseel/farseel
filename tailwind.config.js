@@ -7,20 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: {
-          DEFAULT: '#F6F3EB',
-          deep: '#EEE9DE',
+        ink: '#161411',
+        raised: '#1E1B16',
+        cream: {
+          DEFAULT: '#F2EDE1',
+          muted: '#ACA494',
+          faint: '#837B6C',
         },
-        ink: {
-          DEFAULT: '#1C1A15',
-          soft: '#55504A',
-          faint: '#8C867B',
+        brass: {
+          DEFAULT: '#C9A45C',
+          bright: '#E2C689',
+          deep: '#A98844',
         },
-        rust: {
-          DEFAULT: '#A44E1A',
-          deep: '#7E3A10',
-        },
-        line: '#E0DACC',
+        terra: '#D98757',
+        line: '#3A362D',
       },
       fontFamily: {
         display: ['Fraunces', 'Georgia', 'serif'],
